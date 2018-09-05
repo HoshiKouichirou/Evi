@@ -1,0 +1,67 @@
+body{
+  margin: 0;
+}
+.ps-wrapper{
+  width: 100%;
+  text-align: center;
+  background-color: #FFFFFF;
+}
+.play-space{
+  overflow: hidden;
+  margin: 0 auto;
+  width: 800px;
+  height: 500px;
+  background-color: #34495e;
+}
+.Character{
+  position: relative;
+  top: 35%;
+  margin: 0 auto;
+  background-color:#e74c3c;
+  width: 100px;
+  height: 100px;
+}
+.Score{
+  text-align: left;
+  color: #ecf0f1;
+}
+p{
+  margin: 0;
+}
+
+.p-start{
+  font-size: 50px;
+  position: relative;
+  top: 40%;
+  cursor: default;
+}
+
+.start{
+  transition:3s ease-in-out;
+  z-index: 1;
+  width: 800px;
+  height: 500px;
+  background-color: #7f8c8d;
+}
+.remove{
+  display: none;
+}
+.buy{
+  background-color: black;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  left: 90%;
+  top: 40vh;
+}
+.button{
+  position: relative;
+}
+@@keyframes  {
+  from{
+
+  }
+  to{
+
+  }
+}
