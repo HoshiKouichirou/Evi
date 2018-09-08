@@ -1,5 +1,5 @@
 body{
-  margin: 0;
+  margin: 20px;
 }
 .ps-wrapper{
   width: 100%;
@@ -13,15 +13,26 @@ body{
   height: 500px;
   background-color: #34495e;
 }
-.Character{
+.character{
   position: relative;
-  top: 35%;
+  top: 60px;
   margin: 0 auto;
   background-color:#e74c3c;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
 }
-.Score{
+.evi{
+  position: relative;
+  top: 50px;
+  margin: 0 auto;
+  background-color:#e67e22;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+}
+
+.score{
   text-align: left;
   color: #ecf0f1;
 }
@@ -29,14 +40,20 @@ p{
   margin: 0;
 }
 
-.p-start{
+.p-play{
   font-size: 50px;
   position: relative;
   top: 40%;
   cursor: default;
 }
+.restart{
+  font-size: 30px;
+  position: relative;
+  top: 60%;
+  cursor: default;
+}
 
-.start{
+.play{
   transition:3s ease-in-out;
   z-index: 1;
   width: 800px;
@@ -47,21 +64,66 @@ p{
   display: none;
 }
 .buy{
-  background-color: black;
-  position: relative;
+  background-color: #2ecc71;
+  position: absolute;
   width: 50px;
   height: 50px;
   left: 90%;
-  top: 40vh;
+  top: 260px;
+  border-radius: 25px;
+}
+.hide{
+  background-color: #3498db;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 80%;
+  top: 260px;
+  border-radius: 25px;
 }
 .button{
   position: relative;
 }
-@@keyframes  {
+.enemies{
+  position: relative;
+}
+.enemy-left{
+  position: absolute;
+  top: 140px;
+  width: 50px;
+  height: 50px;
+  background-color: #9b59b6;
+  border-radius: 25px;
+  right: 110%;
+}
+.right{
+  animation-name: enemymotion_left;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-direction:reverse;
+}
+.left{
+  animation-name: enemymotion_left;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+}
+.enemy-right{
+  position: absolute;
+  top: 200px;
+  width: 50px;
+  height: 50px;
+  background-color: #9b59b6;
+  border-radius: 25px;
+  right: -10%;
+}
+@keyframes enemymotion_left {
   from{
-
+    right: 110%;
   }
   to{
-
+    right: -10%;
+    display: none;
   }
 }
