@@ -17,7 +17,49 @@ $(function() {
     }
   }
   function enemymotion() {
-    
+    var enemyselector = 0
+    //Math.floor(Math.random() * Math.floor(10))
+    if (enemyselector < 5) {
+      $("."+ enemyselector +"").toggleClass("left");
+    }
+    else {
+      $("."+ enemyselector +"").toggleClass("right");
+    }
+
+  }
+  function enemyposition() {
+    var enemyarray = [
+      $(".0").position(),
+      $(".1").position(),
+      $(".2").position(),
+      $(".3").position(),
+      $(".4").position(),
+      $(".5").position(),
+      $(".6").position(),
+      $(".7").position(),
+      $(".8").position(),
+      $(".9").position()
+    ]
+    for (var n = 0; n < 10; n++) {
+      let pos = enemyarray[n]
+      enemyhit(pos);
+    }
+    // console.log(enemy0);
+  }
+  function enemyhit(enemyX) {
+    // console.log('~~~')
+    console.log(enemyX)
+    var enemyoutX = enemyX.left;
+    var hitboxoutY = hitboxY + 160;
+    var enemyX = enemyX.left + 50;
+    var hitboxY = $(".hitbox").position().left;
+
+    // console.log('enemyX',Math.floor(enemyX));
+    // console.log('enemyY',enemyY);
+    if(hitboxY <= Math.floor(enemyX) &&  hitboxoutY >= enemyoutX){
+      console.log("hit")
+    }
+
   }
   function gameover() {
     console.log("over")
@@ -63,6 +105,9 @@ $(function() {
       index = 1;
       $(".start").toggleClass("remove");
       var point = setInterval(scoreup, 1);
+      var depot = setInterval(enemymotion, 5000);
+      // setInterval(enemyhit(enemy0), 1)
+      setInterval(enemyposition, 1000.0 / 60.0);
       gamestart();
     }
   });
@@ -74,3 +119,23 @@ $(function() {
 
   })
 }())
+
+
+
+var stats = new Stats();
+stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
+
+function animate() {
+
+	stats.begin();
+
+	// monitored code goes here
+
+	stats.end();
+
+	requestAnimationFrame( animate );
+
+}
+
+requestAnimationFrame( animate );

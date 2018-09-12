@@ -109,6 +109,14 @@ p{
   animation-timing-function: linear;
   animation-delay: 0s;
 }
+.hitbox{
+  position: absolute;
+  width: 160px;
+  height: 250px;
+  background-color: #f39c12;
+  left: 40%;
+  top: 70px;
+}
 .enemy-right{
   position: absolute;
   top: 200px;
