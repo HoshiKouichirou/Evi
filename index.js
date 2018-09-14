@@ -1,24 +1,30 @@
 $(function() {
-  var score = 0;
-  var point = 1;
-  var index = 0;
-  var enemy = 0;
+  var score = 0,
+      point = 1,
+      index = 0,
+      enemy = 0,
+      hide = false;
   function scoreup() {
     $(".score").text(score += point)//スコアカウント
+    if(score <= 0){
+      gameover()
+    }
   }
+
   function gamestart() {
     for (var i = 0; i < 10; i++) {
       if (i < 5) {
-        $(".enemies").append("<div class='enemy-left " + i + " '></div>")
+        $(".enemies").append("<div class='remove enemy-left " + i + " '></div>")
       }
       else {
-        $(".enemies").append("<div class='enemy-right " + i + " '></div>")
+        $(".enemies").append("<div class='remove enemy-right " + i + " '></div>")
       }
     }
   }
   function enemymotion() {
-    var enemyselector = 0
-    //Math.floor(Math.random() * Math.floor(10))
+    var enemyselector = Math.floor(Math.random() * Math.floor(10));
+    // TODO: 動いてる要素が消える仕様を修正
+    $("."+ enemyselector +"").removeClass("remove")
     if (enemyselector < 5) {
       $("."+ enemyselector +"").toggleClass("left");
     }
@@ -44,23 +50,38 @@ $(function() {
       let pos = enemyarray[n]
       enemyhit(pos);
     }
-    // console.log(enemy0);
+
+
   }
-  function enemyhit(enemyX) {
-    // console.log('~~~')
-    console.log(enemyX)
+  function enemyhit(enemyX, e) {
     var enemyoutX = enemyX.left;
-    var hitboxoutY = hitboxY + 160;
     var enemyX = enemyX.left + 50;
     var hitboxY = $(".hitbox").position().left;
+    var hitboxoutY = hitboxY + 160;
 
-    // console.log('enemyX',Math.floor(enemyX));
-    // console.log('enemyY',enemyY);
-    if(hitboxY <= Math.floor(enemyX) &&  hitboxoutY >= enemyoutX){
-      console.log("hit")
+    if(hitboxY <= Math.floor(enemyX) &&  hitboxoutY >= enemyoutX && !hide){
+      score -= 100
     }
+  }
+$(window).keydown(function(e){
+  switch (e.keyCode) {
+    case 67:
+    hide = true;
+      break;
+    default:
 
   }
+})
+$(window).keyup(function(e){
+  switch (e.keyCode) {
+    case 67:
+    hide = false;
+      break;
+    default:
+
+  }
+})
+
   function gameover() {
     console.log("over")
     $(".p-start").text("GAME OVER");
@@ -80,7 +101,7 @@ $(function() {
   function result() {//ゲームリザルト
     console.log("re")
     clearInterval(point);
-    if(score > 600000){
+    if(score > 50000){
       gameclear()
     }
     else {
@@ -105,8 +126,7 @@ $(function() {
       index = 1;
       $(".start").toggleClass("remove");
       var point = setInterval(scoreup, 1);
-      var depot = setInterval(enemymotion, 5000);
-      // setInterval(enemyhit(enemy0), 1)
+      var depot = setInterval(enemymotion, 3000);
       setInterval(enemyposition, 1000.0 / 60.0);
       gamestart();
     }
