@@ -3,14 +3,16 @@ $(function() {
       point = 1,
       index = 0,
       enemy = 0,
-      hide = false;
+      hide = false,
+      test = 0,
+      enemyarray = [];
+
   function scoreup() {
-    $(".score").text(score += point)//スコアカウント
+    $(".score").text(score += point);//スコアカウント
     if(score <= 0){
-      gameover()
+      gameover();
     }
   }
-
   function gamestart() {
     for (var i = 0; i < 10; i++) {
       if (i < 5) {
@@ -19,20 +21,23 @@ $(function() {
       else {
         $(".enemies").append("<div class='remove enemy-right " + i + " '></div>")
       }
+          $("."+ i).toggleClass("remove");
     }
   }
   function enemymotion() {
     var enemyselector = Math.floor(Math.random() * Math.floor(10));
+    // while (test === enemyselector){
+    //   enemyselector = Math.floor(Math.random() * Math.floor(10));
+    // }
     // TODO: 動いてる要素が消える仕様を修正
-    $("."+ enemyselector +"").removeClass("remove")
     if (enemyselector < 5) {
-      $("."+ enemyselector +"").toggleClass("left");
+      $("."+ enemyselector +"").addClass("left");
     }
     else {
-      $("."+ enemyselector +"").toggleClass("right");
+      $("."+ enemyselector +"").addClass("right");
     }
-
   }
+
   function enemyposition() {
     var enemyarray = [
       $(".0").position(),
@@ -48,19 +53,24 @@ $(function() {
     ]
     for (var n = 0; n < 10; n++) {
       let pos = enemyarray[n]
-      enemyhit(pos);
+      enemyhit(pos, n);
+      if (n < 5 && pos.left >= 825) {
+        $("." + n).removeClass("left")
+      }
+      else if (n < 10 && pos.left <= -125){
+        $("." + n).removeClass("right")
+      }
     }
-
-
+    return enemyarray
   }
   function enemyhit(enemyX, e) {
     var enemyoutX = enemyX.left;
     var enemyX = enemyX.left + 50;
     var hitboxY = $(".hitbox").position().left;
     var hitboxoutY = hitboxY + 160;
-
     if(hitboxY <= Math.floor(enemyX) &&  hitboxoutY >= enemyoutX && !hide){
-      score -= 100
+      // score -= 100
+      console.log("hit");
     }
   }
 $(window).keydown(function(e){
@@ -126,9 +136,10 @@ $(window).keyup(function(e){
       index = 1;
       $(".start").toggleClass("remove");
       var point = setInterval(scoreup, 1);
-      var depot = setInterval(enemymotion, 3000);
-      setInterval(enemyposition, 1000.0 / 60.0);
+      var depot = setInterval(enemymotion, 1000);
       gamestart();
+      setInterval(enemyposition, 1)
+      console.log(enemyposition());
     }
   });
   $(".buy").click(function() {

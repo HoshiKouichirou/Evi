@@ -128,10 +128,10 @@ p{
 }
 @keyframes enemymotion_left {
   from{
-    right: 110%;
+    right: 120%;
   }
   to{
-    right: -10%;
+    right: -20%;
     display: none;
   }
 }
