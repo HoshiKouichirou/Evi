@@ -10,7 +10,7 @@ $(function() {
   function scoreup() {
     $(".score").text(Math.floor(score += point));//スコアカウント
     if(score <= 0){
-      gameover();
+      result();
     }
   }
   function gamestart() {
@@ -71,13 +71,14 @@ $(function() {
     var hitboxY = $(".hitbox").position().left;
     var hitboxoutY = hitboxY + 160;
     if(hitboxY <= Math.floor(enemyX) &&  hitboxoutY >= enemyoutX && !hide){
-      score -= 3
+      score -= 10
     }
   }
 $(window).keydown(function(e){
   switch (e.keyCode) {
     case 67:
     point = 0.1
+    $(".character").css("top", "10px")
     hide = true;
       break;
     default:
@@ -87,6 +88,7 @@ $(window).keydown(function(e){
 $(window).keyup(function(e){
   switch (e.keyCode) {
     case 67:
+    $(".character").css("top", "60px")
     point = 1;
     hide = false;
       break;
@@ -108,7 +110,7 @@ $(window).keyup(function(e){
 })
 
   function gameover() {
-    $(".p-start").text(Math.floor(score - 5000)+ "円の損");
+    $(".p-start").text(Math.floor(score - 5000)+ "円の得");
     $(".restart").toggleClass("remove");
     $(".p-start").toggleClass("p-start");
     $(".start").toggleClass("remove");
