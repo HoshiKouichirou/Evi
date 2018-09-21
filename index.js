@@ -8,12 +8,18 @@ $(function() {
       enemyarray = [];
 
   function scoreup() {
-    $(".score").text(score += point);//スコアカウント
+    $(".score").text(Math.floor(score += point));//スコアカウント
     if(score <= 0){
       gameover();
     }
   }
   function gamestart() {
+
+    $(".start").toggleClass("remove");
+    var point = setInterval(scoreup, 1);
+    var depot = setInterval(enemymotion, 3000);
+    setInterval(enemyposition, 1)
+
     for (var i = 0; i < 10; i++) {
       if (i < 5) {
         $(".enemies").append("<div class='remove enemy-left " + i + " '></div>")
@@ -26,10 +32,6 @@ $(function() {
   }
   function enemymotion() {
     var enemyselector = Math.floor(Math.random() * Math.floor(10));
-    // while (test === enemyselector){
-    //   enemyselector = Math.floor(Math.random() * Math.floor(10));
-    // }
-    // TODO: 動いてる要素が消える仕様を修正
     if (enemyselector < 5) {
       $("."+ enemyselector +"").addClass("left");
     }
@@ -69,13 +71,15 @@ $(function() {
     var hitboxY = $(".hitbox").position().left;
     var hitboxoutY = hitboxY + 160;
     if(hitboxY <= Math.floor(enemyX) &&  hitboxoutY >= enemyoutX && !hide){
-      // score -= 100
+      score -= 3
       console.log("hit");
     }
   }
 $(window).keydown(function(e){
+  console.log(e.keyCode)
   switch (e.keyCode) {
     case 67:
+    point = 0.1
     hide = true;
       break;
     default:
@@ -85,16 +89,29 @@ $(window).keydown(function(e){
 $(window).keyup(function(e){
   switch (e.keyCode) {
     case 67:
+    point = 1;
     hide = false;
       break;
+      case 88:
+        if(index === 1){
+          result();
+        }
+        break;
+      case 32:
+      if(index === 0){
+        index = 1;
+        gamestart();
+      }
+        break;
     default:
+
 
   }
 })
 
   function gameover() {
     console.log("over")
-    $(".p-start").text("GAME OVER");
+    $(".p-start").text(Math.floor(score - 10000)+ "円の損");
     $(".restart").toggleClass("remove");
     $(".p-start").toggleClass("p-start");
     $(".start").toggleClass("remove");
@@ -102,7 +119,7 @@ $(window).keyup(function(e){
   }
   function gameclear() {
     console.log("clear")
-    $(".p-start").text("GAME CLEAR");
+    $(".p-start").text(Math.floor(score - 10000) + "円のおつり" );
     $(".restart").toggleClass("remove");
     $(".p-start").toggleClass("p-start");
     $(".start").toggleClass("remove");
@@ -111,7 +128,10 @@ $(window).keyup(function(e){
   function result() {//ゲームリザルト
     console.log("re")
     clearInterval(point);
-    if(score > 50000){
+    $(".start-info").addClass("remove")
+    $(".enemy-left").addClass("remove")
+    $(".enemy-right").addClass("remove")
+    if(score > 10000){
       gameclear()
     }
     else {
@@ -131,17 +151,17 @@ $(window).keyup(function(e){
   //   restart()
   //   console.log("hi")
   // })
-  $(".p-start").click(function() {
-    if (index === 0) {
-      index = 1;
-      $(".start").toggleClass("remove");
-      var point = setInterval(scoreup, 1);
-      var depot = setInterval(enemymotion, 1000);
-      gamestart();
-      setInterval(enemyposition, 1)
-      console.log(enemyposition());
-    }
-  });
+  // $(".p-start").click(function() {
+  //   if (index === 0) {
+  //     index = 1;
+  //     $(".start").toggleClass("remove");
+  //     var point = setInterval(scoreup, 1);
+  //     var depot = setInterval(enemymotion, 3000);
+  //     gamestart();
+  //     setInterval(enemyposition, 1)
+  //     console.log(enemyposition());
+  //   }
+  // });
   $(".buy").click(function() {
     result()
     console.log("good")
@@ -153,20 +173,20 @@ $(window).keyup(function(e){
 
 
 
-var stats = new Stats();
-stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild( stats.dom );
-
-function animate() {
-
-	stats.begin();
-
-	// monitored code goes here
-
-	stats.end();
-
-	requestAnimationFrame( animate );
-
-}
-
-requestAnimationFrame( animate );
+// var stats = new Stats();
+// stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+// document.body.appendChild( stats.dom );
+//
+// function animate() {
+//
+// 	stats.begin();
+//
+// 	// monitored code goes here
+//
+// 	stats.end();
+//
+// 	requestAnimationFrame( animate );
+//
+// }
+//
+// requestAnimationFrame( animate );

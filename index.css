@@ -1,12 +1,14 @@
 body{
   margin: 20px;
+  background-color: #fff;
 }
 .ps-wrapper{
+
   width: 100%;
   text-align: center;
-  background-color: #FFFFFF;
 }
 .play-space{
+  color: #ecf0f1;
   overflow: hidden;
   margin: 0 auto;
   width: 800px;
@@ -26,10 +28,11 @@ body{
   position: relative;
   top: 50px;
   margin: 0 auto;
-  background-color:#e67e22;
+  object-fit: cover;
   width: 56px;
   height: 56px;
   border-radius: 28px;
+  background-image: url(./ebi.png);
 }
 
 .score{
@@ -41,6 +44,7 @@ p{
 }
 
 .p-play{
+  color: #ecf0f1;
   font-size: 50px;
   position: relative;
   top: 40%;
@@ -55,7 +59,7 @@ p{
 
 .play{
   transition:3s ease-in-out;
-  z-index: 1;
+  z-index: 3;
   width: 800px;
   height: 500px;
   background-color: #7f8c8d;
@@ -109,7 +113,10 @@ p{
   animation-timing-function: linear;
   animation-delay: 0s;
 }
+
 .hitbox{
+  z-index: 1;
+  opacity: 0.5;
   position: absolute;
   width: 160px;
   height: 250px;
@@ -125,6 +132,12 @@ p{
   background-color: #9b59b6;
   border-radius: 25px;
   right: -10%;
+}
+.start-info{
+  position: relative;
+  margin: 0 auto;
+  font-size: 30px;
+  top: 50%;
 }
 @keyframes enemymotion_left {
   from{
