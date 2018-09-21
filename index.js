@@ -72,11 +72,9 @@ $(function() {
     var hitboxoutY = hitboxY + 160;
     if(hitboxY <= Math.floor(enemyX) &&  hitboxoutY >= enemyoutX && !hide){
       score -= 3
-      console.log("hit");
     }
   }
 $(window).keydown(function(e){
-  console.log(e.keyCode)
   switch (e.keyCode) {
     case 67:
     point = 0.1
@@ -92,7 +90,7 @@ $(window).keyup(function(e){
     point = 1;
     hide = false;
       break;
-      case 88:
+      case 77:
         if(index === 1){
           result();
         }
@@ -110,61 +108,34 @@ $(window).keyup(function(e){
 })
 
   function gameover() {
-    console.log("over")
-    $(".p-start").text(Math.floor(score - 10000)+ "円の損");
+    $(".p-start").text(Math.floor(score - 5000)+ "円の損");
     $(".restart").toggleClass("remove");
     $(".p-start").toggleClass("p-start");
     $(".start").toggleClass("remove");
     $(".start").toggleClass("start");//ゲームオーバー処理
   }
   function gameclear() {
-    console.log("clear")
-    $(".p-start").text(Math.floor(score - 10000) + "円のおつり" );
+    $(".p-start").text(Math.floor(score - 5000) + "円のおつり" );
     $(".restart").toggleClass("remove");
     $(".p-start").toggleClass("p-start");
     $(".start").toggleClass("remove");
     $(".start").toggleClass("start");//ゲームクリア処理
   }
   function result() {//ゲームリザルト
-    console.log("re")
     clearInterval(point);
     $(".start-info").addClass("remove")
     $(".enemy-left").addClass("remove")
     $(".enemy-right").addClass("remove")
-    if(score > 10000){
+    if(score > 5000){
       gameclear()
     }
     else {
       gameover()
     }
   }
-  // function restart() {
-  //   score = 0
-  //   index = 0
-  //   $(".play").toggleClass("start");
-  //   $(".p-play").toggleClass("p-start");
-  //   $(".restart").toggleClass("remove");　後回し
-  //   $(".p-play").text("START");
-  //
-  // }
-  // $(".restart").click(function() {
-  //   restart()
-  //   console.log("hi")
-  // })
-  // $(".p-start").click(function() {
-  //   if (index === 0) {
-  //     index = 1;
-  //     $(".start").toggleClass("remove");
-  //     var point = setInterval(scoreup, 1);
-  //     var depot = setInterval(enemymotion, 3000);
-  //     gamestart();
-  //     setInterval(enemyposition, 1)
-  //     console.log(enemyposition());
-  //   }
-  // });
+
   $(".buy").click(function() {
     result()
-    console.log("good")
   })
   $(".hide").click(function() {
 
