@@ -37,8 +37,10 @@ body{
 }
 
 .score{
+  position: absolute;
+  font-size: 30px;
   text-align: left;
-  color: #ecf0f1;
+  color: #fff;
 }
 p{
   margin: 0;
@@ -153,13 +155,5 @@ p{
   to{
     right: -20%;
     display: none;
-  }
-}
-@keyframes hide {
-  from{
-    top: 60px;
-  }
-  to{
-    top:20px;
   }
 }

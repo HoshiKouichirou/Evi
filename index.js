@@ -71,7 +71,11 @@ $(function() {
     var hitboxY = $(".hitbox").position().left;
     var hitboxoutY = hitboxY + 160;
     if(hitboxY <= Math.floor(enemyX) &&  hitboxoutY >= enemyoutX && !hide){
-      score -= 10
+      score -= 10;
+      $(".score").css("color", "red")
+    }
+    else {
+      $(".score").css("color", "#fff")
     }
   }
 $(window).keydown(function(e){
